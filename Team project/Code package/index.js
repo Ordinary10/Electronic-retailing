@@ -13,15 +13,12 @@ app.engine('html', require('ejs').__express);
 //5,静态文件
 app.use(express.static('public'));
 
+//6,引入body-parser模块
+var bodyParser = require('body-parser');
+//7，创建 application/x-www-form-urlencoded 编码解析
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-
-// var accountController = require('./controllers/AccountController');
-// app.get('/account', accountController.account);
-// app.post('/login',urlencodedParser, accountController.login);
-// var indexController = require('./Controllers/IndexController');
-
-// app.get('/index',{});
-// app.get('/register',{});
+var controller = require("./controllers/controller");
 
 app.get('/',function(req,res){
     res.render("index",{});
@@ -48,13 +45,9 @@ app.get('/shopping-cart',function(req,res){
     res.render("shopping-cart",{});
 });
 
-app.post("/login",urlencodedParser,function(req,res){
-    res.end("登录成功");
-});
+app.post("/login",urlencodedParser,controller.login);
 
-app.post("/resigned",urlencodedParser,function(req,res){
-    res.end("注册成功");
-});
+app.post("/resigned",urlencodedParser,controller.resgined);
 
 
 app.listen(9999,function(){
