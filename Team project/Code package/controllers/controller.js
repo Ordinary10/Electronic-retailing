@@ -6,18 +6,8 @@ module.exports = {
         var name = req.body.name;
         var password = req.body.password;
         // console.log("控制层的name，password:",name,password);
-        dao.login(name,password,function(result){
-            switch(result){
-                case 1:
-                    res.end("账号不存在，请确认账号。。。");
-                break;
-                case 2:
-                    res.end("登录成功，正在跳转。。。");
-                break;
-                case 3:
-                    res.end("密码错误，请确认密码。。。");
-                break;
-            }
+        dao.login(name,password,function(data){
+           res.end(data);
         });
     },
 
@@ -32,6 +22,18 @@ module.exports = {
                 res.end("账号已存在，请重新注册。。。");
             }
         })
+    },
+
+    index:function(req,res){
+        if(!req.session.sign){
+            req.session.sign=true;
+            res.render("index",{user:"Login",exit:"Registered"});
+            return;
+        }else{
+            var name = req.cookies.name;
+            console.log(name);
+            res.render("index",{user:name,exit:"cancellation"});
+        }
     }
 
 

@@ -5,12 +5,12 @@ function Dao(){
         // console.log("业务层的name，password:",name,password);
         mysql.init();//创建链接
         mysql.selectUser(name,function(result){
-            if(result.length==0){
-                call(1);
-            }else if(result[0].password==password){
-                call(2);
-            }else{
-                call(3);
+            if(result.length==0){             
+                call("1");
+            }else if(result[0].passwords==password){
+                call("2");
+            }else{         
+                call("3");
             }
         });
         mysql.end();//断开连接

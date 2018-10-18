@@ -13,7 +13,7 @@ function Mysql(){
             user:"root",       //数据库账号
             password:"123456",  //数据库密码
             port:"3306",      //数据库端口号
-            database: "userinfor"  //链接的数据
+            database: "progresss"  //链接的数据
         });
         this.connection.connect(); //创立链接
     };//链接数据库函数
@@ -21,7 +21,7 @@ function Mysql(){
 
     this.selectUser = function(name,call){
         // console.log("数据库的name：",name);
-        var sql = "select password from userinfors where name='"+name+"'";//账号查询语句
+        var sql = "select passwords from userinformation where username='"+name+"'";//账号查询语句
         this.connection.query(sql,function(err,result){
             if(err){
                 console.log("error:",err.message)
@@ -30,7 +30,7 @@ function Mysql(){
             var data = JSON.stringify(result);
             var test = JSON.parse(data);
             // console.log("数据库查询返回值：",test);
-            call(result);
+            call(test);
         })
     };//查询账号函数
 
@@ -38,8 +38,9 @@ function Mysql(){
         // var name = crypto(name);
         // var password = crypto(password);//加密存储
         var date = new Date();
-        var sql = "insert into userinfors(name,password,date) values(?,?,?)";
+        var sql = "insert into userinformation(username,passwords,date) values(?,?,?)";
         var userinfor = [name,password,date];
+        console.log(userinfor);
         this.connection.query(sql,userinfor,function(err,result){
             if(err){
                 console.log("error:",err.message)
@@ -49,6 +50,20 @@ function Mysql(){
         })
 
     };//数据库写入用户信息函数
+
+    this.iteminfor = function(item){
+        var sql = "select * from items ";//所有商品详情查询语句
+        this.connection.query(sql,function(err,result){
+            if(err){
+                console.log("error:",err.message)
+                return;
+            };
+            var data = JSON.stringify(result);
+            var test = JSON.parse(data);
+            // console.log("数据库查询返回值：",test);
+            call(test);
+        })
+    }
 
     this.end = function(){
         this.connection.end();
