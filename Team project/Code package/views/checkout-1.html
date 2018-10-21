@@ -153,11 +153,12 @@
                                     switch(data){
                                         case "1":
                                         alert("账号不存在")
-                                        break;
+                                        break;  
                                         case "2":
-                                        alert("登录成功，正在跳转");
-                                        window.location.href = "http://192.168.2.141:9999/index?name="+name;
-                                        break;                                        
+                                        alert("登陆成功，正在跳转");
+                                        document.cookie = "name="+name;
+                                        window.location.href = "http://192.168.1.2:9999/index";
+                                        break;                                     
                                         case "3":
                                         alert("密码错误")
                                         break;

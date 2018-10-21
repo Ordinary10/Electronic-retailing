@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="jquery.min.js"></script>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.body {
+			background-color: rgba(255, 228, 225, 0.5);
+		}
+
+		.top {
+			height: 80px;
+			width: 100%;
+			background-color: rgb(105, 105, 105);
+			position: fixed;
+			top: 0;
+		}
+
+		 .top_logo{
+            width:274px;
+            height:49px;
+            float: left;
+            margin: 10px 0px 0px 5px;
+
+
+        }
+        .top_logo .ziti{
+            display: inline-block;
+            font-size: 20px;
+            color: darkgray;
+            width:274px;
+            height: 50px;
+            line-height: 50px;
+            text-align:center;
+
+        }
+
+
+        .top_links {
+            width: 480px;
+            height: 65px;
+            float: right;
+            line-height: 65px;
+            color: #ADADAD;
+            line-height: 65px;
+            position: relative;
+        }
+
+
+        .top_op {
+            width: 400px;
+        }
+
+        .top_op>ul {
+            list-style-type: none;
+        }
+
+        .top_op>ul>li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .top_op>ul>li>img {
+            vertical-align: text-top;
+        }
+
+        .top_close {
+            width: 80px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            border-left: 1px solid #171717;
+            vertical-align: text-top;
+        }
+
+		.concent_left {
+			background-color: rgba(255, 187, 0, 0.8);
+			width: 10%;
+			height: 100%;
+			position: fixed;
+			top: 80px;
+			left: 15%;
+		}
+
+		.concent_left>a>img {
+			height: 70px;
+			width: 60%;
+			margin-left: 30px;
+			margin-top: 40px;
+		}
+
+		.concent_right {
+			width: 50%;
+			/*height: 400px;
+				background-color: darkcyan;*/
+			margin: 80px auto;
+		}
+
+		.h3 {
+			margin-left: 20px;
+			padding-top: 20px;
+		}
+
+		#add,
+		#del {
+			width: 66px;
+			height: 25px;
+			margin-left: 20px;
+			margin-top: 10px;
+		}
+
+		#add {
+			margin-left: 500px;
+		}
+
+		#prices {
+			width: 60px;
+			height: 20px;
+		}
+
+		#itemname {
+			margin-left: 5px;
+			height: 20px;
+			width: 80px;
+		}
+
+		#instroduction {
+			height: 20px;
+			width: 100px;
+		}
+
+		#path {
+			height: 20px;
+			width: 60px;
+		}
+
+		.some {
+			display: inline-block;
+			margin-left: 10px;
+		}
+
+		.choose {
+			margin-top: 10px;
+		}
+
+		.shangpin {
+			width: 100%;
+			border: 1px solid rgb(105, 105, 105);
+			margin-top: 2px;
+			margin-left: 10px;
+		}
+
+		ul,li {
+			list-style: none;
+		}
+		
+		.shangpin>ul{
+			width: 100%;
+			height: 160px;
+		}
+
+		.shangpin li{
+			display: inline-block;
+			width: 70%;
+			float: left;
+			margin-top: 10px;
+			padding-left: 20px;
+		}
+		
+		#img{
+			width: 150px;
+			height: 150px;
+			margin-left: 5px;
+			margin-top: 0;
+			padding-left: 0;
+		}
+
+		#imgs {
+			width: 150px;
+			height: 150px;
+			
+		}
+	</style>
+</head>
+
+<body class="body">
+	<!--标题栏部分-->
+<!-- <div class="top">
+		<div class="top_logo">
+		  <span class="ziti">香水后台管理系统</span>
+		</div>
+	
+		<div class="top_links">
+			<div class="top_op">
+				<ul>
+					<li>
+						<img src="images/common/user.jpg">：
+						<span>admin</span>
+					</li>
+					<li>
+						<img  src="images/common/month.jpg">：
+						<span >2018.10</span>
+					</li>
+					<li>
+						<img alt="今天是" src="images/common/date.jpg">：
+						<span >2018.10.19</span>
+					</li>
+				</ul>
+			</div>
+			<div class="top_close">
+				<a href="javascript:void(0);" onclick="logout();" target="_parent">
+					<img alt="退出系统" title="退出系统" src="images/common/close.jpg" style="position: relative; top: 10px; left: 25px;">
+				</a>
+			</div>
+		</div>
+	</div> -->
+
+	
+	<%include houtaihead.html%>
+
+	<div class="concent_left">
+		<a href="http://192.168.1.2:9999/user" title="用户管理"><img src="images/logo/1.png" ></a>
+		<a href="http://192.168.1.2:9999/items" title="商品详情"><img src="images/logo/2.png" ></a>
+		<a href="http://192.168.1.2:9999/order" title="订单明细"><img src="images/logo/3.png" ></a>
+	</div>
+	<div class="concent_right">
+		<h3 class="h3">商品详情</h3>
+		<div class="choose">
+			<span class="some">
+				商品名称：<input type="text" name="itemname" id="itemname" />
+			</span>
+			<span class="some">
+				产品介绍：<input type="text" name="instroduction" id="instroduction" />
+			</span>
+			<span class="some">
+				价格：<input type="text" name="prices" id="prices" />
+			</span>
+			<span class="some">
+				本地路径：<input type="text" name="path" id="path" />
+			</span>
+		</div>
+
+		<button name="add" id="add" onclick="add()">增加</button>
+		<button name="add" id="del" onclick="del()">删除</button>
+
+
+		<%data.forEach(function(data){
+			   %>
+		<div class="shangpin">
+			<ul>
+				<li id="img"><img id="imgs" src="<%=data.imgs%>"></li>
+				<li id="name"><%=data.name%></li>
+				<li id="jieshao"><%=data.introduction%></li>
+				<li id="price">$<%=data.prices%></li>
+			</ul>	
+		</div>
+
+		<%})%>
+	</div>
+
+	<script>
+
+		function add() {
+			var itemname = document.getElementById('itemname').value;
+			var instroduction = document.getElementById('instroduction').value;
+			var price = document.getElementById('prices').value;
+			var path = document.getElementById('path').value;
+            console.log(itemname,instroduction,price,path);
+			$.ajax({
+				url: 'add',
+				type: "POST",
+				data: {
+					itemname: itemname,
+					instroduction: instroduction,
+					price: price,
+					path: path
+				},
+				traditional: true,//这里设置为true
+				success: function (data) {
+
+					alert(data);
+				}
+
+			});
+		}
+
+		function del() {
+			var itemname = document.getElementById('itemname');
+			$.ajax({
+				url: 'del',
+				type: "POST",
+				data: {
+					itemname: itemname.value
+				},
+				traditional: true,//这里设置为true
+				success: function (data) {
+
+					alert(data);
+				}
+
+			});
+		}
+	</script>
+
+
+</body>
+
+</html>

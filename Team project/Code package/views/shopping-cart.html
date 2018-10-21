@@ -281,24 +281,26 @@
                                 <table class="table ">
                                     <thead>
                                         <tr>
-                                            <th class="span2">preview</th>
-                                            <th class="span5">product</th>
-                                            <th class="span2 price-column">price</th>
-                                            <th class="span2">quantity</th>
-                                            <th class="span1 price-column">total</th>
+                                            <th class="span2">展示</th>
+                                            <th class="span5">简介</th>
+                                            <th class="span2 price-column">单价</th>
+                                            <th class="span2">数量</th>
+                                            
                                             <th class="span2">&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+
+                                       <%data.forEach(function(obj){%>
                                         <tr>
                                             <td>
                                                 <div class="thumb">
-                                                    <img alt="" src="images/p7.jpg" />
+                                                    <img alt="" src="<%=obj.imgs%>" />
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="desc">
-                                                    <h3>Estee lauder</h3>
+                                                    <h3><%=obj.items%></h3>
                                                     <div class="tag-line">
                                                         Soft Clean Silky Hydrating Lotion
                                                     </div>
@@ -309,34 +311,17 @@
                                             <td>
 
                                                 <div class="price">
-                                                    $112.00
+                                                    $<%=obj.price%>
                                                 </div>
 
                                             </td>
                                             <td>
                                                 <div class="quantity">
-                                                    <select class="chosen-select">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-
-                                                    </select> 
+                                                    <%=obj.numbers%>
                                                 </div>
                                             </td>
 
-                                            <td>
-
-                                                <div class="price">
-                                                    $112.00
-                                                </div>
-
-                                            </td>
+                                            
 
                                             <td>
 
@@ -347,9 +332,14 @@
                                             </td>
                                         </tr>
 
+                                       <%})%>
+                                            
+
+                                        
 
 
-                                        <tr>
+
+                                        <!-- <tr>
                                             <td>
                                                 <div class="thumb">
                                                     <img alt="" src="images/p8.jpg" />
@@ -404,7 +394,7 @@
                                                 </div>
 
                                             </td>
-                                        </tr>
+                                        </tr> -->
 
 
                                     </tbody>

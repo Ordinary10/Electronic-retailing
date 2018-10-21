@@ -9,7 +9,7 @@ function Mysql(){
     this.init = function(){
         var mysql = require("mysql");//引入模块
         this.connection = mysql.createConnection({
-            host:"localhost",   //主机IP
+            host:"192.168.1.2",   //主机IP
             user:"root",       //数据库账号
             password:"123456",  //数据库密码
             port:"3306",      //数据库端口号
@@ -51,7 +51,7 @@ function Mysql(){
 
     };//数据库写入用户信息函数
 
-    this.iteminfor = function(item){
+    this.itemsinfor = function(call){
         var sql = "select * from items ";//所有商品详情查询语句
         this.connection.query(sql,function(err,result){
             if(err){
@@ -60,10 +60,67 @@ function Mysql(){
             };
             var data = JSON.stringify(result);
             var test = JSON.parse(data);
-            // console.log("数据库查询返回值：",test);
             call(test);
         })
+    };
+
+    this.shoppinginfor = function(name,call){
+
+        
+
+        var sql = "select id from userinformation where username='"+name+"'";
+        this.connection.query(sql,function(err,result){
+            if(err){
+                console.log("error:",err.message)
+                return;
+            };
+            var data = JSON.stringify(result);
+            var test = JSON.parse(data);
+            var userid = test[0];
+            call(userid);
+        })
+    };
+
+    this.shopitem = function(userid,call){
+        var sql = "select shopping.items,shopping.price,shopping.numbers,items.imgs from shopping inner join items on shopping.items=items.name where shopping.userid='"+userid+"'";
+        //  var sql2="select userinformation.username,shopping.items,shopping.price from userinformation join shopping on shopping.userid=userinformation.id";
+        // var sql = "select items,price,numbers from shopping where userid=' "+userid+"'";
+        this.connection.query(sql,function(err,result){
+            if(err){
+                console.log("error:",err.message)
+                return;
+            };
+            var data = JSON.stringify(result);
+            var test = JSON.parse(data);
+            call(test);
+        })
+    };
+
+    this.addshopping = function(name,call){     
+        var sql = "select id from userinformation where username='"+name+"'";
+        this.connection.query(sql,function(err,result){
+            if(err){
+                console.log("error:",err.message)
+                return;
+            };
+            var data = JSON.stringify(result);
+            var test = JSON.parse(data);
+            call(test);
+        })
+    };
+
+    this.writeshopping =function(userid,username,name,call){
+        var sql = "insert into shopping(userid,price,items,numbers) values(?,?,?,?)";
+        var arr = [userid,135,name,1];
+        this.connection.query(sql,arr,function(err,result){
+            if(err){
+                console.log("error:",err.message)
+                return;
+            };
+            call("1");
+        })
     }
+
 
     this.end = function(){
         this.connection.end();

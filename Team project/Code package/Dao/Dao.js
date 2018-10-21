@@ -1,37 +1,68 @@
-function Dao(){
+function Dao() {
     var Mysql = require("../mysql/mysql");
     var mysql = new Mysql();
-    this.login = function(name,password,call){
+    this.login = function (name, password, call) {
         // console.log("业务层的name，password:",name,password);
         mysql.init();//创建链接
-        mysql.selectUser(name,function(result){
-            if(result.length==0){             
+        mysql.selectUser(name, function (result) {
+            if (result.length == 0) {
                 call("1");
-            }else if(result[0].passwords==password){
+            } else if (result[0].passwords == password) {
                 call("2");
-            }else{         
+            } else {
                 call("3");
             }
         });
         mysql.end();//断开连接
     };
-    
-    this.resgined = function(name,password,call){
+
+    this.resgined = function (name, password, call) {
         // console.log("注册时业务层的name，password:",name,password);
         mysql.init();//创建链接
-        mysql.selectUser(name,function(result){
-            if(result.length==0){
-                mysql.insertUser(name,password);
+        mysql.selectUser(name, function (result) {
+            if (result.length == 0) {
+                mysql.insertUser(name, password);
                 call(true);
-            }else{
+            } else {
                 call(false);
             }
             mysql.end();//断开连接
         });
+    };
+
+    this.itemsinfor = function (call) {
+        mysql.init();//创建链接
+        mysql.itemsinfor(function (data) {
+            call(data);
+            mysql.end();//断开连接
+        });
+    };
+
+    this.shoppinginfor = function(name,call){
+        mysql.init();//创建链接
+        mysql.shoppinginfor(name,function(userid){
+            mysql.end();//断开连接
+            var userId = userid.id;
+            mysql.init();//创建链接
+            mysql.shopitem(userId,function(test){
+                call(test);
+                mysql.end();//断开连接
+            })           
+        })
+    };
+
+    this.addshopping = function(username,call,name){
+        mysql.init();//创建链接
+        mysql.addshopping(username,function(result){
+            mysql.init();//创建链接
+            var userid = result[0].id;
+            mysql.writeshopping(userid,username,name,function(result){
+                call(result);
+            });
+            mysql.end();//断开连接
+        })
+        mysql.end();//断开连接
     }
-
-
-
 
 }
 
