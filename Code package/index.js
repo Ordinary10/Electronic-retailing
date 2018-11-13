@@ -24,7 +24,7 @@ app.use(cookie());
 var session = require("express-session");
 app.use(session({
     secret:"12345",
-    name: 'express_11_cookie',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+    name: 'user',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
     cookie: {maxAge: 60*60*1000 },     //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
 }));
 
@@ -52,20 +52,20 @@ app.get("/addshopping",controller.addshopping);
 //后台管理模块
 //设置路由地址
 //用户管理
-var checkedc=require('./Controller/checkedC.js');
+var checkedc=require('./controllers/checkedC.js');
 app.get('/user',checkedc.checked);
 app.post('/checked',urlencodedParser,checkedc.checkedOrder)
 //商品详情
-var indexcontrollers = require('./Controller/IndexControllers')
+var indexcontrollers = require('./controllers/IndexControllers')
 app.get('/items',indexcontrollers.items);
 app.post('/add',urlencodedParser,indexcontrollers.add);
 app.post('/del',urlencodedParser,indexcontrollers.del);
 //订单详情
-var ordercontrollers = require("./Controller/OrderControllers");
+var ordercontrollers = require("./controllers/OrderControllers");
 
 app.get('/order',ordercontrollers.finds);
 app.post('/orders',urlencodedParser, ordercontrollers.find)
 
 app.listen(9999,function(){
-    console.log("请通过http://192.168.1.2:9999/ 访问");
+    console.log("请通过http://localhost:9999/ 访问");
 });

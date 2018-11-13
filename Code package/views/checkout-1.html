@@ -5,7 +5,7 @@
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <title>Cosmetic</title>
+    <title>用户</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
@@ -44,22 +44,21 @@
             <div class="container">
 
                 <div class="phase-title current">
-                    <h1>Check out process</h1>
+                    <h1>亲，快加入我们</h1>
                 </div>
 
                 <div class="row-fluid">
                     <div class="span6">
                         <div class="form-holder right-border">
-                            <h4>registered user</h4>
+                            <h4>老朋友请登录</h4>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sem purus, interdum a
-                                mi eget.
+                                
                             </p>
 
                             <div class="control-group">
 
                                 <div class="controls">
-                                    <div class="form-label ">user</div>
+                                    <div class="form-label ">用户</div>
 
                                     <input type="text" id="email" name="email" class="required span12 cusmo-input" />
 
@@ -69,20 +68,20 @@
                             <div class="control-group">
 
                                 <div class="controls">
-                                    <div class="form-label ">Password</div>
+                                    <div class="form-label ">密码</div>
 
                                     <input id="password" type="password" name="password" class="required span12 cusmo-input" />
 
                                 </div>
                             </div>
                             <div class="rememberme">
-                                <input type="checkbox" class="iCheck"> Remember me
+                                <input type="checkbox" class="iCheck"> 记住密码
                             </div>
                             <div class="forget-password">
-                                <a href="#">Forgot your password?</a>
+                                <a href="#">忘记密码？</a>
                             </div>
                             <div class="button-holder">
-                                <button class="cusmo-btn narrow " type="button" id="login">log in</button>
+                                <button class="cusmo-btn narrow " type="button" id="login">登录</button>
                             </div>
 
                         </div>
@@ -94,16 +93,15 @@
 
                     <div class="span6">
                         <div class="form-holder">
-                            <h4>new member</h4>
+                            <h4>新会员</h4>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sem purus, interdum a
-                                mi eget.
+                                
                             </p>
 
                             <div class="control-group">
 
                                 <div class="controls">
-                                    <div class="form-label ">user</div>
+                                    <div class="form-label ">用户</div>
 
                                     <input type="text" name="email" class="required span12 cusmo-input" id="user" />
 
@@ -113,7 +111,7 @@
                             <div class="control-group">
 
                                 <div class="controls">
-                                    <div class="form-label ">Password</div>
+                                    <div class="form-label ">密码</div>
 
                                     <input type="password" name="password" class="required span12 cusmo-input" id="pwd" />
 
@@ -122,13 +120,13 @@
                             <div class="control-group">
 
                                 <div class="controls">
-                                    <div class="form-label ">Re-Password</div>
+                                    <div class="form-label ">确认密码</div>
 
                                     <input type="password" name="repassword" class="required span12 cusmo-input" id="pwds" />
 
                                 </div>
                             </div>
-                            <button class="cusmo-btn narrow pull-right" type="button" id="resigned">sign up</button>
+                            <button class="cusmo-btn narrow pull-right" type="button" id="resigned">注册</button>
 
                         </div>
                     </div>
@@ -156,8 +154,7 @@
                                         break;  
                                         case "2":
                                         alert("登陆成功，正在跳转");
-                                        document.cookie = "name="+name;
-                                        window.location.href = "http://192.168.1.2:9999/index";
+                                        window.location.href = "http://localhost:9999/index";
                                         break;                                     
                                         case "3":
                                         alert("密码错误")

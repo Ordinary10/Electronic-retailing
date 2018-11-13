@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="jquery.min.js"></script>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.body {
+			background-color: rgba(255, 228, 225, 0.5);
+		}
+
+		.top {
+			height: 80px;
+			width: 100%;
+			background-color: rgb(105, 105, 105);
+			position: fixed;
+			top: 0;
+		}
+
+		.top_logo {
+			width: 274px;
+			height: 49px;
+			float: left;
+			margin: 10px 0px 0px 5px;
+
+
+		}
+
+		.top_logo .ziti {
+			display: inline-block;
+			font-size: 20px;
+			color: darkgray;
+			width: 274px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+
+		}
+
+
+		.top_links {
+			width: 480px;
+			height: 65px;
+			float: right;
+			line-height: 65px;
+			color: #ADADAD;
+			line-height: 65px;
+			position: relative;
+		}
+
+
+		.top_op {
+			width: 400px;
+
+
+		}
+
+		.top_op ul {
+			list-style-type: none;
+		}
+
+		.top_op ul li {
+			display: inline-block;
+			margin-right: 20px;
+		}
+
+		.top_op ul li img {
+			vertical-align: text-top;
+		}
+
+		.top_close {
+			width: 80px;
+			position: absolute;
+			right: 0px;
+			top: 0px;
+			border-left: 1px solid #171717;
+			vertical-align: text-top;
+		}
+
+		.concent_left {
+			background-color: rgba(255, 187, 0, 0.8);
+			width: 10%;
+			height: 100%;
+			position: fixed;
+			top: 80px;
+			left: 15%;
+		}
+
+		.concent_left>a>img {
+			height: 70px;
+			width: 60%;
+			margin-left: 30px;
+			margin-top: 40px;
+		}
+
+		.concent_right {
+			width: 50%;
+			height: 400px;
+			margin: 80px auto;
+		}
+
+
+		/*用户管理*/
+		.yonghu {
+			width: 100%;
+			height: 70px;
+			line-height: 90px;
+			border-bottom: solid 1px grey;
+		}
+
+		.chaxun {
+			width: 100%;
+			height: 60px;
+			border-bottom: solid 1px grey;
+		}
+
+		.chaxun span {
+			margin-left: -245px;
+			line-height: 60px;
+		}
+
+		.chaxun input {
+			height: 40px;
+			margin-top: 8px;
+			margin-left: 250px;
+			float: left;
+		}
+
+		.chaxun-btn {
+			width: 100px;
+			height: 40px;
+			border-radius: 8%;
+			margin-top: -48px;
+			margin-left: 438px;
+			float: left;
+
+		}
+
+		#checked {
+			outline: none;
+		}
+
+		/* 用户基本信息展示 */
+		.ul {
+			display: flex;
+			flex-wrap: nowrap;
+		}
+
+		.ul li {
+			list-style: none;
+			display: inline-block;
+			margin: auto;
+		}
+
+		.ul-id {
+			width: 10%;
+			text-align: center;
+		}
+
+		.ul-user {
+			width: 30%;
+			text-align: left;
+		}
+
+		.ul-date {
+			width: 50%;
+			text-align: left;
+		}
+	</style>
+</head>
+
+<body class="body">
+
+	<%include houtaihead.html%>
+
+
+	<div class="concent_left">
+		<a href="http://localhost:9999/user" title="用户管理"><img src="images/logo/1.png"></a>
+		<a href="http://localhost:9999/items" title="商品详情"><img src="images/logo/2.png"></a>
+		<a href="http://localhost:9999/order" title="订单明细"><img src="images/logo/3.png"></a>
+
+	</div>
+	<div class="concent_right">
+
+		<div class="yonghu">
+			<h2>用户管理</h2>
+		</div>
+		<div class="chaxun">
+			<span>用户名：</span>
+			<input id="yhName" type="text">
+			<button id="checked" onclick="checked()" class="chaxun-btn">查询用户密码</button>
+
+		</div>
+
+		<div>
+			<ul class="ul">
+				<li class="ul-id">ID</li>
+				<li class="ul-user">用户名</li>
+				<li class="ul-date">注册时间</li>
+			</ul>
+			<%data.forEach(function(obj) {%>
+			<ul class="ul">
+				<li class="ul-id">
+					<%=obj.id%>
+				</li>
+				<li class="ul-user">
+					<%=obj.username%>
+				</li>
+				<li class="ul-date">
+					<%=obj.date%>
+				</li>
+
+			</ul>
+			<%})%>
+		</div>
+
+	</div>
+
+	<script>
+		function checked() {
+			var yhName = document.getElementById("yhName");
+			$.ajax({
+				url: 'checked',
+				type: 'POST',
+				data: {
+					yhName: yhName.value
+				},
+				traditional: true,
+				success: function (data) {
+					var data = JSON.parse(data);
+					console.log(data);
+					if (data == "0") {
+						alert("查无此用户")
+					} else {
+						alert("用户密码为" + data[0].passwords);
+
+					}
+				}
+			})
+		}
+	</script>
+
+</body>
+
+</html>

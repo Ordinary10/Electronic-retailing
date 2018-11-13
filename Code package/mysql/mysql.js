@@ -9,7 +9,7 @@ function Mysql(){
     this.init = function(){
         var mysql = require("mysql");//引入模块
         this.connection = mysql.createConnection({
-            host:"192.168.1.2",   //主机IP
+            host:"localhost",   //主机IP
             user:"root",       //数据库账号
             password:"123456",  //数据库密码
             port:"3306",      //数据库端口号
@@ -109,9 +109,9 @@ function Mysql(){
         })
     };
 
-    this.writeshopping =function(userid,username,name,call){
+    this.writeshopping =function(userid,name,price,num,call){
         var sql = "insert into shopping(userid,price,items,numbers) values(?,?,?,?)";
-        var arr = [userid,135,name,1];
+        var arr = [userid,price,name,num];
         this.connection.query(sql,arr,function(err,result){
             if(err){
                 console.log("error:",err.message)

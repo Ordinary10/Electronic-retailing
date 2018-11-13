@@ -1,0 +1,189 @@
+<section class="section-head">
+    <div class="container">
+        <div class="row-fluid top-row">
+            <div class="span4">
+                <div class="top-menu left">
+                    <ul class="inline">
+                        <li><a href="http://localhost:9999/index">主页</a></li>
+                        <li><a href="http://localhost:9999/contact">留言</a></li>
+                        <li><a href="http://localhost:9999/shopping-cart">结账台</a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="span4 logo-holder">
+                <div class="logo">
+                    <span class="icon">
+                        <img alt="" src="images/logo.png" />
+                    </span>
+                    <span class="text">
+                        <a href="http://localhost:9999/index">美容产品<span>co</span></a>
+                    </span>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="span4 cart-holder">
+                <div class="top-menu cart-menu">
+                    <ul class="inline">
+                        <li>
+                            <% if(user=="Login"){ %>
+                            <a href="http://localhost:9999/checkout-1" id="username">
+                                <%=user%>
+                            </a>
+
+                            <%}else{%>
+                            <a href="#" id="username">
+                                <%=user%>
+                            </a>
+                            <%}%>
+
+                        </li>
+                        <li>
+
+                            <div class="doviz-dropdown">
+                                <% if(user=="Login"){ %>
+                                <a class=" dropdown-toggle" data-hover="dropdown" href="http://localhost:9999/checkout-1"
+                                    id="cancellation">
+                                    <%=exit%>
+                                </a>
+                                <% }else{ %>
+                                <a class=" dropdown-toggle" data-hover="dropdown" href="http://localhost:9999/checkout-1"
+                                    id="cancellation" onclick="cancellation()">
+                                    <%=exit%>
+                                </a>
+                                <%} %>
+                            </div>
+                            <script>
+                                function cancellation() {
+                                    $.ajax({
+                                        url: "cancellation",
+                                        type: "post",
+                                        data: {},
+                                        traditional: true,
+                                        success: function (data) {
+                                            return;
+                                        }
+                                    })
+                                }
+                            </script>
+                        </li>
+
+                        <li>
+                            <div class="basket">
+                                <div class="basket-item-count">
+                                    0
+                                </div>
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle" data-hover="dropdown" href="http://localhost:9999/shopping-cart">
+                                        <img alt="basket" src="images/icon-basket.png" />
+                                    </a>
+                                    
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="top-categories">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span9">
+                    <ul class="inline top-cat-menu">
+                        <li>
+                            <a href="http://localhost:9999/products-grid">面容</a>
+                        </li>
+                        <li><a href="http://localhost:9999/products-grid">主体</a></li>
+                        <li><a href="http://localhost:9999/products-grid">化妆</a></li>
+
+
+                        <li><a href="http://localhost:9999/products-grid">发饰</a></li>
+                        <li><a href="http://localhost:9999/products-grid">化妆品类</a></li>
+                        <li><a href="http://localhost:9999/products-grid">礼品</a></li>
+                        <li><a href="http://localhost:9999/products-grid"> 品牌</a></li>
+                        <li><a href="http://localhost:9999/products-grid">非有不可</a></li>
+
+                    </ul>
+
+
+                    <select class="top-cat-menu dropdown">
+                        <option value="products-grid">
+                            面子
+                        </option>
+
+
+                        <option value="products-grid">
+                            主体
+                        </option>
+                        <option value="products-grid">
+                            化妆
+                        </option>
+                        <option value="products-grid">
+                            发饰
+                        </option>
+                        <option value="products-grid">
+                            香水
+                        </option>
+                        <option value="products-grid">
+                            礼品
+                        </option>
+                        <option value="products-grid">
+                            品牌
+                        </option>
+
+                        <option value="products-grid">
+                            必备单品
+                        </option>
+
+
+
+                    </select>
+
+
+                </div>
+                <div class="span3">
+                    <div class="search-field-holder">
+                        <form>
+                            <input class="span12" type="text" placeholder="Type and hit enter">
+                            <i class="icon-search"></i>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<style>
+    #admin {
+        position: fixed;
+        right: 30px;
+        top: 30px;
+    }
+
+    #admins {
+        text-decoration: none;
+        width: 200px;
+        height: 40px;
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: rgba(200, 200, 200, 0.1);
+    }
+</style>
+<div id="admin">
+    <a id="admins" href="http://localhost:9999/user">进入管理者模式</a>
+</div>

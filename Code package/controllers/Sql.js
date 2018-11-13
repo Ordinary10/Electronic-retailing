@@ -4,7 +4,7 @@ function Sql() {
 
         //1，创建一个connection
         this.connection = mysql.createConnection({
-            host: '192.168.1.2',       //主机 ip
+            host: 'localhost',       //主机 ip
             user: 'root',            //MySQL认证用户名
             password: '123456',                //MySQL认证用户密码
             port: '3306',                 //端口号

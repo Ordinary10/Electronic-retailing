@@ -55,8 +55,6 @@
 
         .top_op {
             width: 400px;
-
-
         }
 
         .top_op ul {
@@ -131,31 +129,32 @@
             /*background-color: rgba(255,228,225,0.5);*/
         }
 
-        .right-two ul>li{
-            display: inline-block;
-            width:100px;
-            text-align: center;
-            background-color: rgba(255,228,225,0.5);
-            margin:10px 30px 0px 20px;
-        }
-
-
-
         .right-three{
             width: 98%;
-            height: 400px;
             margin-top: 5px;
-            /*background-color: pink;*/
         }
 
-        .right-three ul>li{
-            display: inline-block;
-            width:130px;
-            height: 30px;
-            line-height: 30px;
-            text-align: center;
-            /*background-color: yellowgreen;*/
-            margin:15px 10px 0px 15px;
+        /* 展示模块 */
+        .ul{
+            display: flex;
+            flex-wrap: nowrap;
+            list-style: none;
+        }
+        .ul>li{
+            margin: auto;
+            list-style: none;
+        }
+        .ul-id,.ul-number{
+            width: 10%;
+            text-align: center
+        }
+        .ul-user{
+            width: 20%;
+            text-align: left;
+        }
+        .ul-items{
+            text-align: left;
+            width: 30%;
         }
     </style>
 
@@ -169,46 +168,12 @@
     </script>
 </head>
 <body class="body">
-
-<!--标题栏部分-->
-<!-- <div class="top">
-    <div class="top_logo">
-      <span class="ziti">香水后台管理系统</span>
-    </div>
-
-    <div class="top_links">
-        <div class="top_op">
-            <ul>
-                <li>
-                    <img src="images/common/user.jpg">：
-                    <span>admin</span>
-                </li>
-                <li>
-                    <img  src="images/common/month.jpg">：
-                    <span >2018.10</span>
-                </li>
-                <li>
-                    <img alt="今天是" src="images/common/date.jpg">：
-                    <span >2018.10.19</span>
-                </li>
-            </ul>
-        </div>
-        <div class="top_close">
-            <a href="javascript:void(0);" onclick="logout();" target="_parent">
-                <img alt="退出系统" title="退出系统" src="images/common/close.jpg" style="position: relative; top: 10px; left: 25px;">
-            </a>
-        </div>
-    </div>
-</div> -->
-
-
 <%include houtaihead.html%>
 
-
 <div class="concent_left">
-    <a href="http://192.168.1.2:9999/user" title="用户管理"><img src="images/logo/1.png" ></a>
-    <a href="http://192.168.1.2:9999/items" title="商品详情"><img src="images/logo/2.png" ></a>
-    <a href="http://192.168.1.2:9999/order" title="订单明细"><img src="images/logo/3.png" ></a>
+    <a href="http://localhost:9999/user" title="用户管理"><img src="images/logo/1.png" ></a>
+    <a href="http://localhost:9999/items" title="商品详情"><img src="images/logo/2.png" ></a>
+    <a href="http://localhost:9999/order" title="订单明细"><img src="images/logo/3.png" ></a>
 </div>
 
 
@@ -236,7 +201,7 @@
                     traditional:true,
                     success:function(data){
                         if(data=="1"){
-                            window.location.href = "http://192.168.1.2:9999/order?name="+sousuo;
+                            window.location.href = "http://localhost:9999/order?name="+sousuo;
                         }else{
                             alert("该用户没有订单");
                         }
@@ -249,22 +214,22 @@
 
 
     <div class="right-two">
-        <ul>
-        <li>订单ID号</li>
-        <li>购买人</li>
-        <li>商品名字</li>
-        <li>商品数量</li>
+        <ul class="ul">
+        <li class="ul-id">订单ID号</li>
+        <li class="ul-user">购买人</li>
+        <li class="ul-items">商品名字</li>
+        <li class="ul-number">商品数量</li>
     </ul>
     </div>
 
     <div class="right-three">
         <%if(result.length!=0){%>
         <%result.forEach(function(obj){%>
-        <ul>
-            <li><%=obj.id%></li>
-            <li><%=obj.username%></li>
-            <li><%=obj.itmes%></li>
-            <li><%=obj.numbers%></li>
+        <ul class="ul">
+            <li class="ul-id"><%=obj.id%></li>
+            <li class="ul-user"><%=obj.username%></li>
+            <li class="ul-items"><%=obj.itmes%></li>
+            <li class="ul-number"><%=obj.numbers%></li>
         </ul>
 
         <%})%>

@@ -1,16 +1,14 @@
-var Dao = require("../Dao/Dao");
+var Dao = require("./Dao");
 var dao = new Dao();
 module.exports = {
 
     login: function (req, res) {
         var name = req.body.name;
         var password = req.body.password;
-        // console.log("控制层的name，password:",name,password);
         dao.login(name, password, function (num) {
             if (num == "2") {
-                req.session.sign = true;
+                req.session.user = { username: name };
                 res.cookie("name", name, { maxAge: 60 * 60 * 1000 });
-                res.cookie("password", password, { maxAge: 60 * 60 * 1000 });
             }
             res.end(num);
         });
@@ -19,7 +17,6 @@ module.exports = {
     resgined: function (req, res) {
         var name = req.body.name;
         var password = req.body.password;
-        // console.log("控制层的name，password:",name,password);
         dao.resgined(name, password, function (result) {
             if (result) {
                 res.end("注册成功，请在左侧登录。。。");
@@ -31,8 +28,8 @@ module.exports = {
 
     index: function (req, res) {
         dao.itemsinfor(function (data) {
-            if (req.session.sign) {
-                res.render("index", { user: req.cookies.name, exit: "cancellation", data: data });
+            if (req.session.user) {
+                res.render("index", { user: req.session.user.username, exit: "cancellation", data: data });
                 return;
             } else {
                 res.render("index", { user: "Login", exit: "Resgined", data: data });
@@ -42,8 +39,8 @@ module.exports = {
 
     contact: function (req, res) {
         dao.itemsinfor(function (data) {
-            if (req.session.sign) {
-                res.render("contact", { user: req.cookies.name, exit: "cancellation" });
+            if (req.session.user) {
+                res.render("contact", { user: req.session.user.username, exit: "cancellation" });
                 return;
             } else {
                 res.render("contact", { user: "Login", exit: "Resgined" });
@@ -54,8 +51,8 @@ module.exports = {
     checkout: function (req, res) {
         dao.itemsinfor(function (data) {
             // console.log(data);
-            if (req.session.sign) {
-                res.render("checkout-1", { user: req.cookies.name, exit: "cancellation" });
+            if (req.session.user) {
+                res.render("checkout-1", { user: req.session.user.username, exit: "cancellation" });
                 return;
             } else {
                 res.render("checkout-1", { user: "Login", exit: "Resgined" });
@@ -66,8 +63,8 @@ module.exports = {
     products: function (req, res) {
         dao.itemsinfor(function (data) {
             // console.log(data);
-            if (req.session.sign) {
-                res.render("products-grid", { user: req.cookies.name, exit: "cancellation" });
+            if (req.session.user) {
+                res.render("products-grid", { user: req.session.user.username, exit: "cancellation" });
                 return;
             } else {
                 res.render("products-grid", { user: "Login", exit: "Resgined" });
@@ -77,11 +74,11 @@ module.exports = {
 
     shopping: function (req, res) {
         // console.log(req.cookies.name);
-        if (req.cookies.name == undefined ||req.cookies.name=="Login") {
+        if (!req.cookies.name) {
             dao.itemsinfor(function (data) {
                 // console.log(req.session.sign)
-                if (req.session.sign) {
-                    res.render("index", { user: req.cookies.name, exit: "cancellation", data: data });
+                if (req.session.user) {
+                    res.render("index", { user: req.session.user.username, exit: "cancellation", data: data });
                     return;
                 } else {
                     res.render("index", { user: "Login", exit: "Resgined", data: data });
@@ -98,21 +95,25 @@ module.exports = {
     },
 
     cancellation: function (req, res) {
-        req.session.sign = false;
-        req.cookies.name = "Login";
-        res.render("checkout-1", { user: req.cookies.name, exit: "Resgined" });
+        req.session.user = { username: "Login" };
+        res.cookie("name", req.session.user.username, { maxAge: 0 })
+        res.render("checkout-1", { user: req.session.user.username, exit: "Resgined" });
     },
 
-    addshopping:function(req,res){
+    addshopping: function (req, res) {
         var name = req.query.name;
-        var usename= req.query.username;
-        dao.addshopping(usename,function(result){
-            if(result!="1"){
-                res.end("添加失败")
-            }else{
-                res.end("添加成功")
+        var username = req.query.username;
+        var price = req.query.price;
+        var num = req.query.num;
+        // console.log(name, username, price, num)
+
+        dao.addshopping(name, username, price, num, function (data) {
+            if (data == "1") {
+                res.end("1")
+            } else if (data == "2") {
+                res.end("2")
             }
-        },name);
+        });
     }
 
 }

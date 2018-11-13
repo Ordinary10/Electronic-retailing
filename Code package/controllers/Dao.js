@@ -38,32 +38,35 @@ function Dao() {
         });
     };
 
-    this.shoppinginfor = function(name,call){
+    this.shoppinginfor = function (name, call) {
         mysql.init();//创建链接
-        mysql.shoppinginfor(name,function(userid){
+        mysql.shoppinginfor(name, function (userid) {
             mysql.end();//断开连接
             var userId = userid.id;
             mysql.init();//创建链接
-            mysql.shopitem(userId,function(test){
+            mysql.shopitem(userId, function (test) {
                 call(test);
                 mysql.end();//断开连接
-            })           
+            })
         })
     };
 
-    this.addshopping = function(username,call,name){
+    this.addshopping = function (name,username,price,num,call) {
         mysql.init();//创建链接
-        mysql.addshopping(username,function(result){
+        mysql.addshopping(username, function (result) {
+
+            if(result.length==0){
+                call("1");
+            }else{
             mysql.init();//创建链接
-            var userid = result[0].id;
-            mysql.writeshopping(userid,username,name,function(result){
-                call(result);
-            });
-            mysql.end();//断开连接
+            mysql.writeshopping(result[0].id, name,price,num, function (result) {
+                call("2");
+                mysql.end();//断开连接
+            })
+        }
         })
         mysql.end();//断开连接
     }
-
 }
 
 module.exports = Dao;

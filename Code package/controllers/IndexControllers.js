@@ -1,5 +1,5 @@
 exports.items = function (req, res) {
-    var Sql = require('../Dao/Sql');
+    var Sql = require('./Sql');
     var sql = new Sql();
     sql.init();
     sql.selectshangpin(function (data) {
@@ -13,7 +13,7 @@ exports.add = function (req, res) {
     var introduction = req.body.instroduction;
     var prices = req.body.price;
     var path = req.body.path;
-    var Sql = require('../Dao/Sql');
+    var Sql = require('./Sql');
     var sql = new Sql();
     sql.init(); 
     console.log(name,introduction,prices,path)
@@ -30,7 +30,7 @@ exports.add = function (req, res) {
 
 exports.del = function (req, res) {
     var name = req.body.itemname;
-    var Sql = require('../Dao/Sql');
+    var Sql = require('./Sql');
     var sql = new Sql();
     sql.init();
     sql.chaxunshangpin(name,function(data){
